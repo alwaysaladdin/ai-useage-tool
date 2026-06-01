@@ -1,8 +1,12 @@
 # Dependencies
 node_modules/
+.npm-cache/
+.cargo-home/
 
 # Build output
 dist/
+src-tauri/target/
+src-tauri/binaries/
 
 # Local runtime data. The SQLite database contains machine-local Codex usage
 # history and should not be committed.

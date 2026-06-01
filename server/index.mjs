@@ -31,6 +31,12 @@ const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${request.headers.host}`);
 
+    if (request.method === "OPTIONS" && url.pathname.startsWith("/api/")) {
+      response.writeHead(204, corsHeaders());
+      response.end();
+      return;
+    }
+
     if (url.pathname === "/api/summary" && request.method === "GET") {
       const summary = getSummary(db, url.searchParams.get("range") || "today");
       sendJson(response, 200, {
@@ -81,10 +87,19 @@ function shutdown() {
 
 function sendJson(response, status, body) {
   response.writeHead(status, {
+    ...corsHeaders(),
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
   });
   response.end(JSON.stringify(body));
+}
+
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
 }
 
 function publicConfig() {

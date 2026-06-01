@@ -17,6 +17,36 @@ npm run dev
 
 打开 `http://127.0.0.1:5173/`。
 
+## macOS 菜单栏开发
+
+Tauri 菜单栏版会复用同一套采集服务和 React 页面。左键点击菜单栏里的 `Codex` 会弹出小面板，右键或菜单可打开完整 Dashboard、手动同步或退出。
+
+桌面版打包时会执行 `npm run desktop:prepare`，把当前 Node 运行时复制成 Tauri sidecar，并把 `server/` 作为 App 资源一起打包。release 模式下 `.app` 启动后会自动拉起本地 API，不需要用户手动运行 `npm start`。
+
+首次运行需要先安装 Rust 工具链：
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+然后运行：
+
+```bash
+npm run desktop:dev
+```
+
+这条命令会通过 Tauri 启动桌面壳，并用 `beforeDevCommand` 自动启动现有的本地 API 与 Vite。开发模式下完整 Dashboard 仍然是 `http://127.0.0.1:5173/`。
+
+打包 macOS `.app`：
+
+```bash
+npm run desktop:build
+```
+
+release `.app` 内部 API 默认监听 `http://127.0.0.1:4177`，SQLite 写入系统 App Data 目录。开发模式仍由 `npm run dev` 启动本地 API，方便调试。
+
+如果要改端口，同时设置后端 `CODEX_USAGE_PORT` 和前端 `VITE_CODEX_USAGE_API_BASE`。
+
 ## 生产运行
 
 ```bash

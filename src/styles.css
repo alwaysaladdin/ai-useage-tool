@@ -371,8 +371,13 @@ a {
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
   min-height: 116px;
   padding: 18px;
+}
+
+.metric-card > div:last-child {
+  min-width: 0;
 }
 
 .metric-icon {
@@ -416,6 +421,7 @@ a {
 .metric-card strong {
   display: block;
   width: 100%;
+  max-width: 100%;
   margin-top: 6px;
   overflow: hidden;
   color: var(--text);
@@ -927,4 +933,341 @@ a {
   .metric-card {
     min-height: 96px;
   }
+}
+
+body.is-menubar {
+  min-width: 360px;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(16, 25, 38, 0.96), rgba(7, 14, 24, 0.98)),
+    #07101a;
+}
+
+.menubar-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(100vw, 390px);
+  height: min(100vh, 760px);
+  margin: 0 auto;
+  padding: 14px;
+  overflow: hidden;
+  color: var(--text);
+}
+
+.menubar-titlebar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 38px;
+}
+
+.menubar-titlebar strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.menubar-titlebar span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--soft);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.icon-button:hover,
+.menubar-action:hover {
+  border-color: rgba(85, 223, 231, 0.35);
+  color: var(--text);
+}
+
+.menubar-error {
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 127, 160, 0.28);
+  border-radius: var(--radius);
+  color: #ffd7e0;
+  font-size: 12px;
+  background: rgba(255, 127, 160, 0.1);
+}
+
+.menubar-quota-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mini-quota,
+.menubar-metrics > div,
+.menubar-section {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(12, 21, 33, 0.86);
+}
+
+.mini-quota {
+  min-height: 128px;
+  padding: 12px;
+}
+
+.mini-quota span,
+.menubar-metrics span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mini-quota strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--cyan);
+  font-size: 32px;
+  line-height: 1;
+}
+
+.mini-quota--violet strong {
+  color: var(--violet);
+}
+
+.mini-quota em {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+}
+
+.mini-quota small {
+  display: block;
+  margin-top: 6px;
+  color: var(--soft);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.mini-progress {
+  height: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(150, 171, 196, 0.13);
+}
+
+.mini-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: currentColor;
+}
+
+.mini-quota--cyan .mini-progress {
+  color: var(--cyan);
+}
+
+.mini-quota--violet .mini-progress {
+  color: var(--violet);
+}
+
+.menubar-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 10px;
+}
+
+.menubar-metrics > div {
+  min-width: 0;
+  padding: 12px;
+}
+
+.menubar-metrics strong {
+  display: block;
+  margin-top: 7px;
+  overflow: hidden;
+  font-size: 18px;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menubar-section {
+  min-width: 0;
+  padding: 12px;
+}
+
+.mini-heading,
+.mini-project-row,
+.mini-session-row,
+.menubar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.mini-heading {
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.mini-heading h2 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.mini-heading span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mini-project-list,
+.mini-session-list {
+  display: grid;
+  gap: 8px;
+}
+
+.mini-project-row {
+  justify-content: space-between;
+  gap: 9px;
+  min-height: 30px;
+  color: var(--soft);
+  font-size: 12px;
+}
+
+.mini-project-row > div {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+}
+
+.mini-project-row i {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+.mini-project-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-project-row strong {
+  margin-left: auto;
+  color: var(--cyan);
+}
+
+.mini-project-row em {
+  width: 42px;
+  color: var(--soft);
+  font-style: normal;
+  font-weight: 800;
+  text-align: right;
+}
+
+.mini-session-row {
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 48px;
+  padding: 8px;
+  border: 1px solid rgba(150, 171, 196, 0.12);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.mini-session-main {
+  min-width: 0;
+}
+
+.mini-session-main strong,
+.mini-session-main span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-session-main strong {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.mini-session-main span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.mini-session-meta {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+
+.mini-session-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--soft);
+  font-size: 11px;
+}
+
+.mini-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.menubar-actions {
+  gap: 8px;
+  margin-top: auto;
+}
+
+.menubar-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--soft);
+  background: rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+}
+
+.menubar-action:first-child,
+.menubar-action:nth-child(2) {
+  flex: 1 1 0;
+}
+
+.menubar-action:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.menubar-action--ghost {
+  width: 38px;
+  padding: 0;
 }

@@ -7,16 +7,25 @@
     "api": "node --no-warnings=ExperimentalWarning server/index.mjs",
     "build": "vite build",
     "collect": "node --no-warnings=ExperimentalWarning server/collector.mjs --once",
+    "desktop:prepare": "node scripts/prepare-sidecar.mjs",
+    "desktop:build": "CARGO_HOME=.cargo-home tauri build",
+    "desktop:dev": "CARGO_HOME=.cargo-home tauri dev",
     "dev": "node scripts/dev.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "start": "node --no-warnings=ExperimentalWarning server/index.mjs",
+    "tauri": "tauri",
     "test": "node --test"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2.11.0",
+    "@tauri-apps/plugin-shell": "^2.3.5",
     "@vitejs/plugin-react": "^6.0.2",
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "vite": "^8.0.15"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.2"
   }
 }

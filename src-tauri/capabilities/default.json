@@ -1,0 +1,24 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Default desktop permissions for the Codex Usage Monitor windows.",
+  "windows": ["menubar", "dashboard"],
+  "permissions": [
+    "core:default",
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        {
+          "name": "binaries/codex-usage-node",
+          "sidecar": true,
+          "args": [
+            "--no-warnings=ExperimentalWarning",
+            {
+              "validator": "^.+server/index\\.mjs$"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
