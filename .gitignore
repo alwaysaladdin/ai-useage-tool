@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local runtime data. The SQLite database contains machine-local Codex usage
+# history and should not be committed.
+data/
+
+# Local environment and OS/editor noise
+.env
+.env.local
+.DS_Store
+npm-debug.log*
+*.log
