@@ -11,6 +11,7 @@ export function MenubarApp() {
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState("");
   const [error, setError] = useState("");
   const [, setClockTick] = useState(Date.now());
 
@@ -29,8 +30,17 @@ export function MenubarApp() {
   const syncNow = useCallback(async () => {
     setSyncing(true);
     try {
-      await triggerCollect();
+      const result = await triggerCollect();
       await loadSummary();
+      const scanned = Number(result?.scanned || 0);
+      const failed = Number(result?.failed || 0);
+      if (failed > 0) {
+        setSyncMessage(`同步完成，${failed} 个文件失败`);
+      } else if (scanned > 0) {
+        setSyncMessage(`同步完成，更新 ${scanned} 个文件`);
+      } else {
+        setSyncMessage("同步完成，本地暂无新事件");
+      }
     } catch (syncError) {
       setError(syncError.message);
     } finally {
@@ -59,6 +69,12 @@ export function MenubarApp() {
   }, [syncNow]);
 
   useEffect(() => {
+    if (!syncMessage) return undefined;
+    const timer = setTimeout(() => setSyncMessage(""), 3_500);
+    return () => clearTimeout(timer);
+  }, [syncMessage]);
+
+  useEffect(() => {
     function handleKeyDown(event) {
       if (event.key === "Escape") hideMenubarWindow();
     }
@@ -79,7 +95,7 @@ export function MenubarApp() {
       <header className="menubar-titlebar">
         <div>
           <strong>Codex Usage</strong>
-          <span>{loading ? "加载中" : `更新 ${formatDateTime(summary?.updatedAt)}`}</span>
+          <span>{loading ? "加载中" : syncing ? "正在扫描本地事件" : syncMessage || "本地事件数据"}</span>
         </div>
         <button className="icon-button" type="button" onClick={hideMenubarWindow} aria-label="关闭小面板">
           <X size={16} />
